@@ -46,7 +46,7 @@ export const SolutionViewer: React.FC<SolutionViewerProps> = ({
       <div
         key={step.stepNumber}
         id={`step-card-${step.stepNumber}`}
-        className="bg-white border border-stone-200 rounded-xl p-5 shadow-xs transition-all"
+        className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-5 shadow-xs transition-colors"
       >
         {/* Step Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3 mb-4">
@@ -272,7 +272,7 @@ export const SolutionViewer: React.FC<SolutionViewerProps> = ({
   return (
     <section aria-labelledby="solution-viewer-heading" className="space-y-4">
       {/* Top Header */}
-      <div className="bg-white border border-stone-200 rounded-xl p-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <h2 id="solution-viewer-heading" className="text-base font-bold text-stone-900 flex items-center gap-2">
             <GraduationCap className="w-5 h-5 text-amber-600" />

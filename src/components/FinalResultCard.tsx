@@ -38,16 +38,16 @@ export const FinalResultCard: React.FC<FinalResultCardProps> = ({
   };
 
   return (
-    <section aria-labelledby="final-result-heading" className="bg-white border border-stone-200 rounded-xl p-6 shadow-sm">
+    <section aria-labelledby="final-result-heading" className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-6 shadow-sm">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-3.5 sm:pb-4 mb-4 sm:mb-6">
         <div>
           <div className="flex items-center gap-2">
             <span className="p-1.5 rounded-lg bg-emerald-100 text-emerald-700">
               <CheckCircle2 className="w-5 h-5" />
             </span>
             <div>
-              <h2 id="final-result-heading" className="text-lg font-bold text-stone-900">
+              <h2 id="final-result-heading" className="text-base sm:text-lg font-bold text-stone-900">
                 Final Optimal Assignment
               </h2>
               <p className="text-xs text-stone-500">
@@ -73,23 +73,23 @@ export const FinalResultCard: React.FC<FinalResultCardProps> = ({
       </div>
 
       {/* Mandatory Explicit Equation Banner (PRD §8) */}
-      <div className="mb-6 rounded-xl bg-stone-900 text-stone-100 p-5 shadow-inner">
+      <div className="mb-4 sm:mb-6 rounded-xl bg-stone-900 text-stone-100 p-3.5 sm:p-5 shadow-inner">
         <div className="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-1">
           Explicit Final Equation
         </div>
-        <div className="text-xl sm:text-2xl font-mono font-bold text-amber-300 tracking-tight break-all">
+        <div className="text-lg sm:text-2xl font-mono font-bold text-amber-300 tracking-tight break-all">
           {equationString}
         </div>
-        <div className="mt-2 text-xs text-stone-400 flex items-center gap-1.5">
+        <div className="mt-2 text-xs text-stone-400 flex flex-wrap items-center gap-1.5">
           <span>Formula:</span>
           <span className="font-mono">
             {isMax ? 'Σ Profit(Assigned Pairs)' : 'Σ Cost(Assigned Pairs)'}
           </span>
-          <span className="text-stone-500">• Computed strictly from original values</span>
+          <span className="text-stone-500 hidden sm:inline">• Computed strictly from original values</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
         {/* Assignment Table (2 Cols) */}
         <div className="lg:col-span-2">
           <h3 className="text-xs font-bold uppercase tracking-wider text-stone-600 mb-3 flex items-center gap-1.5">

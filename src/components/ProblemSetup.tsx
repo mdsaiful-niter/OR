@@ -116,15 +116,15 @@ export const ProblemSetup: React.FC<ProblemSetupProps> = ({
   };
 
   return (
-    <section aria-labelledby="problem-setup-heading" className="bg-white border border-stone-200 rounded-xl p-5 shadow-xs">
-      <div className="border-b border-stone-100 pb-4 mb-5">
+    <section aria-labelledby="problem-setup-heading" className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-5 shadow-xs">
+      <div className="border-b border-stone-100 pb-3 sm:pb-4 mb-4 sm:mb-5">
         <h2 id="problem-setup-heading" className="text-base font-bold text-stone-900 flex items-center gap-2">
           <BookOpen className="w-4 h-4 text-stone-700" />
           1. Problem Context Setup
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5">
         {/* Objective Toggle */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-semibold uppercase tracking-wider text-stone-600">
@@ -135,27 +135,27 @@ export const ProblemSetup: React.FC<ProblemSetupProps> = ({
               type="button"
               id="btn-objective-minimize"
               onClick={() => handleObjectiveChange('minimize')}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-md text-xs font-bold transition-all ${
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-2 sm:px-3 rounded-md text-xs font-bold transition-all ${
                 context.objective === 'minimize'
                   ? 'bg-white text-stone-900 shadow-xs border border-stone-200/80'
                   : 'text-stone-500 hover:text-stone-800'
               }`}
             >
-              <TrendingDown className="w-3.5 h-3.5 text-emerald-600" />
-              Minimize (Cost / Time)
+              <TrendingDown className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span>Minimize<span className="hidden sm:inline"> (Cost / Time)</span></span>
             </button>
             <button
               type="button"
               id="btn-objective-maximize"
               onClick={() => handleObjectiveChange('maximize')}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-md text-xs font-bold transition-all ${
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-2 sm:px-3 rounded-md text-xs font-bold transition-all ${
                 context.objective === 'maximize'
                   ? 'bg-white text-stone-900 shadow-xs border border-stone-200/80'
                   : 'text-stone-500 hover:text-stone-800'
               }`}
             >
-              <TrendingUp className="w-3.5 h-3.5 text-amber-600" />
-              Maximize (Profit)
+              <TrendingUp className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+              <span>Maximize<span className="hidden sm:inline"> (Profit)</span></span>
             </button>
           </div>
         </div>

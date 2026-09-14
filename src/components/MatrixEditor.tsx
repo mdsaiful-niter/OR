@@ -210,7 +210,7 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
   };
 
   return (
-    <section aria-label="Matrix Editor" className="bg-white border border-stone-200 rounded-xl p-5 shadow-xs">
+    <section aria-label="Matrix Editor" className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-5 shadow-xs">
       {/* Matrix Dimension & Utility Controls */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stone-100 pb-4 mb-5">
         <div className="flex flex-wrap items-center gap-2">
@@ -301,7 +301,7 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
           <thead>
             <tr>
               {/* Corner Entity Header: Diagonal split with Machines (bottom-left) and Operations (top-right) */}
-              <th className="relative p-0 bg-stone-100/90 font-semibold text-xs border border-stone-200 min-w-[140px] w-[140px] h-[52px] select-none overflow-hidden">
+              <th className="relative p-0 bg-stone-100/90 font-semibold text-xs border border-stone-200 min-w-[95px] sm:min-w-[135px] w-[95px] sm:w-[135px] h-[46px] sm:h-[52px] select-none overflow-hidden">
                 <svg
                   className="absolute inset-0 w-full h-full pointer-events-none text-stone-300 corner-diagonal-line"
                   preserveAspectRatio="none"
@@ -319,8 +319,8 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
                 </svg>
 
                 {/* Right (upper-right) portion: Operations */}
-                <div className="absolute top-1.5 right-2 text-right pointer-events-none">
-                  <span className="text-[11px] font-bold text-stone-800 tracking-tight">
+                <div className="absolute top-1 right-1.5 sm:top-1.5 sm:right-2 text-right pointer-events-none">
+                  <span className="text-[10px] sm:text-[11px] font-bold text-stone-800 tracking-tight">
                     {context.columnEntityCategory === 'Operations' || context.columnEntityName === 'Operation'
                       ? 'Operations'
                       : (context.columnEntityName || 'Operations')}
@@ -328,8 +328,8 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
                 </div>
 
                 {/* Left (lower-left) portion: Machines */}
-                <div className="absolute bottom-1.5 left-2 text-left pointer-events-none">
-                  <span className="text-[11px] font-bold text-stone-700 tracking-tight">
+                <div className="absolute bottom-1 left-1.5 sm:bottom-1.5 sm:left-2 text-left pointer-events-none">
+                  <span className="text-[10px] sm:text-[11px] font-bold text-stone-700 tracking-tight">
                     {context.rowEntityCategory === 'Machines' || context.rowEntityName === 'Machine'
                       ? 'Machines'
                       : (context.rowEntityName || 'Machines')}
@@ -341,7 +341,7 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
               {context.columns.slice(0, n).map((colLabel, cIdx) => (
                 <th
                   key={cIdx}
-                  className="p-2 text-center bg-stone-50 border border-stone-200 min-w-[100px]"
+                  className="p-1 sm:p-2 text-center bg-stone-50 border border-stone-200 min-w-[62px] sm:min-w-[90px]"
                 >
                   <input
                     type="text"
@@ -350,7 +350,7 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
                     onChange={(e) => handleColLabelChange(cIdx, e.target.value)}
                     onKeyDown={(e) => handleColLabelKeyDown(e, cIdx)}
                     placeholder={context.columnEntityName ? `${context.columnEntityName} ${cIdx + 1}` : `Col ${cIdx + 1}`}
-                    className="w-full text-center text-xs font-semibold text-stone-800 bg-transparent px-1.5 py-1 rounded hover:bg-stone-200/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="w-full text-center text-xs font-semibold text-stone-800 bg-transparent px-1 py-1 rounded hover:bg-stone-200/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-amber-500 truncate"
                     title="Rename column"
                   />
                 </th>
@@ -362,7 +362,7 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
             {matrix.map((row, rIdx) => (
               <tr key={rIdx} className="hover:bg-stone-50/50">
                 {/* Editable Row Header */}
-                <th className="p-2 bg-stone-50 border border-stone-200 min-w-[140px]">
+                <th className="p-1 sm:p-2 bg-stone-50 border border-stone-200 min-w-[95px] sm:min-w-[135px] w-[95px] sm:w-[135px]">
                   <input
                     type="text"
                     id={`row-label-${rIdx}`}
@@ -370,7 +370,7 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
                     onChange={(e) => handleRowLabelChange(rIdx, e.target.value)}
                     onKeyDown={(e) => handleRowLabelKeyDown(e, rIdx)}
                     placeholder={context.rowEntityName ? `${context.rowEntityName} ${String.fromCharCode(65 + rIdx)}` : `Row ${rIdx + 1}`}
-                    className="w-full text-xs font-semibold text-stone-800 bg-transparent px-1.5 py-1 rounded hover:bg-stone-200/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="w-full text-xs font-semibold text-stone-800 bg-transparent px-1 py-1 rounded hover:bg-stone-200/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-amber-500 truncate"
                     title="Rename row"
                   />
                 </th>
@@ -381,7 +381,7 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
                   return (
                     <td
                       key={cIdx}
-                      className={`p-1.5 text-center border border-stone-200 ${
+                      className={`p-0.5 sm:p-1.5 text-center border border-stone-200 ${
                         error ? 'bg-red-50/70 ring-1 ring-red-400' : 'bg-white'
                       }`}
                     >
@@ -394,7 +394,7 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
                         onKeyDown={(e) => handleCellKeyDown(e, rIdx, cIdx)}
                         onFocus={(e) => e.currentTarget.select()}
                         placeholder="0"
-                        className={`w-full text-center font-mono text-base sm:text-lg font-bold py-2.5 px-1.5 rounded transition-all focus:outline-none ${
+                        className={`w-full text-center font-mono text-base sm:text-lg font-bold py-1.5 sm:py-2.5 px-1 sm:px-1.5 rounded transition-colors duration-150 focus:outline-none ${
                           error
                             ? 'text-red-700 font-black focus:ring-2 focus:ring-red-500'
                             : 'text-stone-900 hover:bg-stone-50 focus:bg-amber-50/50 focus:ring-2 focus:ring-amber-500 font-bold'
