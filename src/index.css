@@ -1,0 +1,753 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* =========================================================
+   DYNAMIC AMBIENT LIGHT EFFECTS (Day & Night)
+   ========================================================= */
+
+/* Floating Ambient Light Orbs (Dynamic light effect, not static flat color) */
+.ambient-light-glow-1 {
+  position: absolute;
+  top: -15%;
+  left: 20%;
+  width: 65vw;
+  height: 55vh;
+  border-radius: 9999px;
+  filter: blur(85px);
+  opacity: 0.65;
+  pointer-events: none;
+  animation: ambient-drift-1 14s infinite ease-in-out alternate;
+}
+
+.ambient-light-glow-2 {
+  position: absolute;
+  top: 35%;
+  right: -10%;
+  width: 55vw;
+  height: 60vh;
+  border-radius: 9999px;
+  filter: blur(95px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: ambient-drift-2 18s infinite ease-in-out alternate;
+}
+
+@keyframes ambient-drift-1 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(30px, 40px) scale(1.08);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-20px, 20px) scale(0.95);
+    opacity: 0.55;
+  }
+}
+
+@keyframes ambient-drift-2 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(-40px, -30px) scale(1.12);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(25px, 20px) scale(0.98);
+    opacity: 0.5;
+  }
+}
+
+/* =========================================================
+   1. DAY MOOD (Crisp, High-Contrast Professional Daylight)
+   ========================================================= */
+body.theme-day,
+.theme-day {
+  background-color: #f1f5f9 !important;
+  background-image: none !important;
+  color: #0f172a !important;
+}
+
+.theme-day .ambient-light-glow-1,
+.theme-day .ambient-light-glow-2 {
+  display: none !important;
+}
+
+.theme-day header {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+}
+
+.theme-day .bg-white {
+  background-color: #ffffff !important;
+  backdrop-filter: none !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.06) !important;
+}
+
+.theme-day .bg-stone-50,
+.theme-day [class*="bg-stone-50"] {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+.theme-day .bg-stone-100,
+.theme-day [class*="bg-stone-100"] {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+.theme-day .bg-stone-200 {
+  background-color: #e2e8f0 !important;
+  border-color: #cbd5e1 !important;
+}
+
+.theme-day .border-stone-200,
+.theme-day .border-stone-100 {
+  border-color: #cbd5e1 !important;
+}
+
+/* Day Mode High-Contrast Text */
+.theme-day .text-stone-900,
+.theme-day .text-stone-800 {
+  color: #0f172a !important;
+}
+
+.theme-day .text-stone-700 {
+  color: #1e293b !important;
+}
+
+.theme-day .text-stone-600 {
+  color: #334155 !important;
+}
+
+.theme-day .text-stone-500 {
+  color: #475569 !important;
+}
+
+.theme-day .text-stone-400 {
+  color: #64748b !important;
+}
+
+/* Day Mode Form Inputs & Selects */
+.theme-day input[type="text"],
+.theme-day input[type="number"],
+.theme-day select {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border-color: #94a3b8 !important;
+  font-weight: 600 !important;
+}
+
+.theme-day input:focus,
+.theme-day select:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25) !important;
+  background-color: #ffffff !important;
+}
+
+.theme-day input::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+/* Day Mode Tables, Cells & Diagonal Line */
+.theme-day table th {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.theme-day table td {
+  border-color: #cbd5e1 !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+.theme-day .corner-diagonal-line {
+  color: #64748b !important;
+}
+
+.theme-day th input {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+.theme-day th input::placeholder {
+  color: #475569 !important;
+}
+
+.theme-day td input {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+.theme-day td input:focus {
+  background-color: #f0fdf4 !important;
+  border-color: #059669 !important;
+  box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.3) !important;
+}
+
+/* Day Mode Solve Button */
+.theme-day #btn-solve-hungarian {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border: 1px solid #0f172a !important;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.15) !important;
+  animation: none !important;
+}
+
+.theme-day #btn-solve-hungarian:hover {
+  background: #1e293b !important;
+}
+
+/* Day Mode Laser Covering Lines */
+.theme-day .line-row-beam {
+  background-color: #0284c7 !important;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.6) !important;
+  height: 3px !important;
+}
+
+.theme-day .line-col-beam {
+  background-color: #7c3aed !important;
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.6) !important;
+  width: 3px !important;
+}
+
+/* Day Mode Assigned Zeros Highlight */
+.theme-day td.bg-emerald-100\/90,
+.theme-day td.matrix-cell-assigned {
+  background-color: #d1fae5 !important;
+  box-shadow: inset 0 0 0 2px #059669 !important;
+  border-color: #059669 !important;
+}
+
+.theme-day td.matrix-cell-assigned .cell-val {
+  color: #064e3b !important;
+  font-weight: 900 !important;
+}
+
+/* Day Mode Matrix High-Contrast Cell & Foreground Styling (Zero Grayness) */
+.theme-day .matrix-cell-normal {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+.theme-day .matrix-cell-normal .cell-val {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+.theme-day .matrix-cell-uncovered {
+  background-color: #fef3c7 !important; /* Crisp Warm Amber - Never Gray */
+  border-color: #f59e0b !important;
+}
+.theme-day .matrix-cell-uncovered .cell-val {
+  color: #451a03 !important; /* Espresso Brown with > 11:1 contrast */
+  font-weight: 800 !important;
+}
+.theme-day .matrix-cell-uncovered .cell-val-zero {
+  color: #451a03 !important;
+  font-weight: 900 !important;
+}
+.theme-day .cell-badge-uncovered {
+  background-color: #92400e !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+.theme-day .matrix-cell-intersection,
+.theme-day .matrix-cell-both-covered {
+  background-color: #f3e8ff !important; /* Crisp Soft Purple */
+  border-color: #a855f7 !important;
+}
+.theme-day .matrix-cell-intersection .cell-val,
+.theme-day .matrix-cell-both-covered .cell-val {
+  color: #3b0764 !important; /* Deep Purple with > 11:1 contrast */
+  font-weight: 800 !important;
+}
+.theme-day .matrix-cell-intersection .cell-val-zero,
+.theme-day .matrix-cell-both-covered .cell-val-zero {
+  color: #3b0764 !important;
+  font-weight: 900 !important;
+}
+.theme-day .cell-badge-intersection {
+  background-color: #7e22ce !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+.theme-day .matrix-cell-row-covered {
+  background-color: #e0f2fe !important; /* Crisp Sky Blue */
+  border-color: #38bdf8 !important;
+}
+.theme-day .matrix-cell-row-covered .cell-val {
+  color: #0c4a6e !important;
+  font-weight: 700 !important;
+}
+
+.theme-day .matrix-cell-col-covered {
+  background-color: #e0e7ff !important; /* Crisp Indigo */
+  border-color: #818cf8 !important;
+}
+.theme-day .matrix-cell-col-covered .cell-val {
+  color: #1e1b4b !important;
+  font-weight: 700 !important;
+}
+
+.theme-day .cell-badge-zero {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.theme-day .min-reduction-cell {
+  background-color: #fef3c7 !important;
+  color: #451a03 !important;
+  border-color: #fcd34d !important;
+  font-weight: 800 !important;
+}
+
+.theme-day .min-reduction-header {
+  background-color: #fde68a !important;
+  color: #451a03 !important;
+  border-color: #f59e0b !important;
+  font-weight: 800 !important;
+}
+
+/* Day Mode Tutor Explanation Accordion & High-Contrast Box */
+.theme-day .tutor-explanation-btn {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+.theme-day .tutor-explanation-btn:hover {
+  background-color: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+}
+
+.theme-day .tutor-btn-title {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+.theme-day .tutor-btn-status {
+  color: #334155 !important;
+}
+
+.theme-day .tutor-arrow-collapsed {
+  background-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+.theme-day .tutor-arrow-expanded {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+.theme-day .tutor-explanation-box {
+  background-color: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.theme-day .tutor-explanation-text {
+  color: #0f172a !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.625 !important;
+}
+
+/* =========================================================
+   2. NIGHT MOOD (Cosmic Midnight + Cyber Neon Glow)
+   ========================================================= */
+body.theme-night,
+.theme-night {
+  background-color: #060911 !important;
+  background-image: 
+    radial-gradient(ellipse 90% 60% at 50% -15%, rgba(6, 182, 212, 0.25) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 50% at 100% 40%, rgba(147, 51, 234, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 0% 80%, rgba(14, 165, 233, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(236, 72, 153, 0.15) 0%, transparent 60%) !important;
+  background-attachment: fixed !important;
+  color: #f1f5f9 !important;
+}
+
+.theme-night .ambient-light-glow-1 {
+  background: radial-gradient(circle, rgba(0, 243, 255, 0.35) 0%, rgba(2, 132, 199, 0.12) 60%, transparent 80%);
+}
+
+.theme-night .ambient-light-glow-2 {
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.32) 0%, rgba(126, 34, 206, 0.1) 60%, transparent 80%);
+}
+
+.theme-night header {
+  background-color: rgba(10, 15, 28, 0.88) !important;
+  border-color: rgba(56, 189, 248, 0.25) !important;
+  box-shadow: 0 4px 25px rgba(0, 243, 255, 0.12), inset 0 1px 0 rgba(56, 189, 248, 0.3) !important;
+}
+
+.theme-night .bg-white {
+  background-color: rgba(12, 18, 34, 0.88) !important;
+  backdrop-filter: blur(14px);
+  border-color: rgba(56, 189, 248, 0.25) !important;
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.08), inset 0 1px 0 rgba(56, 189, 248, 0.28) !important;
+}
+
+.theme-night .bg-stone-50,
+.theme-night [class*="bg-stone-50"] {
+  background-color: rgba(8, 12, 23, 0.95) !important;
+  border-color: rgba(56, 189, 248, 0.22) !important;
+}
+
+.theme-night [class*="bg-purple-50"] {
+  background-color: rgba(24, 15, 38, 0.85) !important;
+  border-color: rgba(168, 85, 247, 0.35) !important;
+}
+
+.theme-night [class*="bg-blue-50"],
+.theme-night [class*="bg-indigo-50"] {
+  background-color: rgba(10, 20, 40, 0.85) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+}
+
+.theme-night .bg-stone-100,
+.theme-night [class*="bg-stone-100"] {
+  background-color: rgba(17, 26, 48, 0.9) !important;
+  border-color: rgba(56, 189, 248, 0.25) !important;
+}
+
+.theme-night .bg-stone-200 {
+  background-color: #1e293b !important;
+}
+
+.theme-night .border-stone-200,
+.theme-night .border-stone-100 {
+  border-color: rgba(56, 189, 248, 0.2) !important;
+}
+
+.theme-night .corner-diagonal-line {
+  color: rgba(56, 189, 248, 0.35) !important;
+}
+
+.theme-night .text-stone-900,
+.theme-night .text-stone-800 {
+  color: #f1f5f9 !important;
+  text-shadow: 0 0 10px rgba(241, 245, 249, 0.15);
+}
+
+.theme-night .text-stone-700,
+.theme-night .text-stone-600 {
+  color: #e2e8f0 !important;
+}
+
+.theme-night .text-stone-500,
+.theme-night .text-stone-400 {
+  color: #94a3b8 !important;
+}
+
+.theme-night .text-amber-700,
+.theme-night .text-amber-800,
+.theme-night .text-amber-900 {
+  color: #fbbf24 !important;
+}
+
+.theme-night .text-indigo-700,
+.theme-night .text-indigo-800,
+.theme-night .text-blue-700,
+.theme-night .text-blue-800,
+.theme-night .text-blue-900 {
+  color: #38bdf8 !important;
+}
+
+.theme-night .text-purple-700,
+.theme-night .text-purple-800,
+.theme-night .text-purple-900 {
+  color: #c084fc !important;
+}
+
+/* Night Mode Tutor Explanation Accordion & High-Contrast Box */
+.theme-night .tutor-explanation-btn {
+  background-color: rgba(13, 21, 39, 0.95) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.08) !important;
+}
+
+.theme-night .tutor-explanation-btn:hover {
+  background-color: rgba(19, 31, 58, 0.95) !important;
+  border-color: rgba(0, 243, 255, 0.6) !important;
+  box-shadow: 0 0 16px rgba(0, 243, 255, 0.18) !important;
+}
+
+.theme-night .tutor-btn-title {
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+}
+
+.theme-night .tutor-btn-status {
+  color: #38bdf8 !important;
+}
+
+.theme-night .tutor-arrow-collapsed {
+  background-color: rgba(56, 189, 248, 0.15) !important;
+  color: #38bdf8 !important;
+}
+
+.theme-night .tutor-arrow-expanded {
+  background-color: rgba(0, 243, 255, 0.25) !important;
+  color: #00f3ff !important;
+}
+
+.theme-night .tutor-explanation-box {
+  background-color: #060b17 !important;
+  border: 1px solid rgba(0, 243, 255, 0.45) !important;
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.12), inset 0 0 15px rgba(0, 243, 255, 0.04) !important;
+}
+
+.theme-night .tutor-explanation-text {
+  color: #ffffff !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.625 !important;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.theme-night input[type="text"],
+.theme-night input[type="number"],
+.theme-night select {
+  color: #00f3ff !important;
+  background-color: #0c1222 !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+}
+
+.theme-night input:focus {
+  background-color: #111a32 !important;
+  border-color: #00f3ff !important;
+  box-shadow: 0 0 16px rgba(0, 243, 255, 0.75), inset 0 0 6px rgba(0, 243, 255, 0.25) !important;
+}
+
+.theme-night input::placeholder {
+  color: rgba(56, 189, 248, 0.5) !important;
+  opacity: 0.85;
+}
+
+.theme-night table th,
+.theme-night table td {
+  border-color: rgba(56, 189, 248, 0.18) !important;
+}
+
+.theme-night .hover\:bg-stone-50:hover,
+.theme-night .hover\:bg-stone-50\/50:hover {
+  background-color: rgba(18, 28, 52, 0.8) !important;
+}
+
+.theme-night .hover\:bg-stone-100:hover {
+  background-color: rgba(22, 34, 62, 0.8) !important;
+}
+
+.theme-night .hover\:bg-stone-200:hover {
+  background-color: rgba(29, 44, 80, 0.8) !important;
+}
+
+/* Night Mode Solve Button Neon & Glow Effect */
+.theme-night #btn-solve-hungarian {
+  background: linear-gradient(135deg, #00f3ff, #0284c7) !important;
+  color: #030712 !important;
+  font-weight: 800 !important;
+  border: 1px solid #7be4ec !important;
+  box-shadow: 0 0 22px rgba(0, 243, 255, 0.85), 0 0 45px rgba(0, 243, 255, 0.4) !important;
+  animation: night-solve-glow 2.2s infinite ease-in-out alternate;
+}
+
+@keyframes night-solve-glow {
+  0% {
+    box-shadow: 0 0 16px rgba(0, 243, 255, 0.7), 0 0 30px rgba(0, 243, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 28px rgba(0, 243, 255, 0.95), 0 0 55px rgba(0, 243, 255, 0.55);
+  }
+}
+
+/* Night Mode Laser Covering Lines */
+.theme-night .line-row-beam {
+  background-color: #38bdf8 !important;
+  box-shadow: 0 0 12px #00f3ff, 0 0 24px rgba(0, 243, 255, 0.9) !important;
+  height: 3px !important;
+}
+
+.theme-night .line-col-beam {
+  background-color: #c084fc !important;
+  box-shadow: 0 0 12px #e879f9, 0 0 24px rgba(232, 121, 249, 0.9) !important;
+  width: 3px !important;
+}
+
+/* Night Mode Assigned Zeros Glow */
+.theme-night td.bg-emerald-100\/90,
+.theme-night td.matrix-cell-assigned {
+  background-color: #05291e !important;
+  box-shadow: inset 0 0 16px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.4) !important;
+  border-color: #34d399 !important;
+}
+.theme-night td.matrix-cell-assigned .cell-val {
+  color: #6ee7b7 !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 8px rgba(110, 231, 183, 0.5) !important;
+}
+
+/* Night Mode Matrix High-Contrast Cell & Foreground Styling (Zero Murky Gray) */
+.theme-night .matrix-cell-normal {
+  background-color: #0c1427 !important;
+  border-color: rgba(56, 189, 248, 0.25) !important;
+}
+.theme-night .matrix-cell-normal .cell-val {
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+}
+.theme-night .matrix-cell-normal .cell-val-zero {
+  color: #00f3ff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 8px rgba(0, 243, 255, 0.6) !important;
+}
+
+/* Uncovered Cells in Night Mode: Solid rich dark amber with bright gold digits (NO GRAY!) */
+.theme-night .matrix-cell-uncovered {
+  background-color: #261604 !important;
+  border-color: #f59e0b !important;
+  box-shadow: inset 0 0 12px rgba(245, 158, 11, 0.2) !important;
+}
+.theme-night .matrix-cell-uncovered .cell-val {
+  color: #fde047 !important; /* Vivid bright gold digits with > 12:1 contrast */
+  font-weight: 900 !important;
+  text-shadow: 0 0 8px rgba(253, 224, 71, 0.45) !important;
+}
+.theme-night .matrix-cell-uncovered .cell-val-zero {
+  color: #fef08a !important; /* Brightest luminous yellow for 0 */
+  font-weight: 900 !important;
+  text-shadow: 0 0 10px rgba(254, 240, 138, 0.8) !important;
+}
+.theme-night .cell-badge-uncovered {
+  background-color: rgba(245, 158, 11, 0.3) !important;
+  color: #fde047 !important;
+  border: 1px solid #f59e0b !important;
+  font-weight: 800 !important;
+}
+
+/* Intersection Cells in Night Mode: Solid rich deep purple with bright lilac digits */
+.theme-night .matrix-cell-intersection,
+.theme-night .matrix-cell-both-covered {
+  background-color: #210d30 !important;
+  border-color: #c084fc !important;
+  box-shadow: inset 0 0 12px rgba(192, 132, 252, 0.2) !important;
+}
+.theme-night .matrix-cell-intersection .cell-val,
+.theme-night .matrix-cell-both-covered .cell-val {
+  color: #f3e8ff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 8px rgba(243, 232, 255, 0.45) !important;
+}
+.theme-night .matrix-cell-intersection .cell-val-zero,
+.theme-night .matrix-cell-both-covered .cell-val-zero {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
+}
+.theme-night .cell-badge-intersection {
+  background-color: rgba(192, 132, 252, 0.3) !important;
+  color: #f3e8ff !important;
+  border: 1px solid #c084fc !important;
+  font-weight: 800 !important;
+}
+
+/* Row Covered in Night Mode: Deep blue with bright sky digits */
+.theme-night .matrix-cell-row-covered {
+  background-color: #091c38 !important;
+  border-color: #38bdf8 !important;
+}
+.theme-night .matrix-cell-row-covered .cell-val {
+  color: #7dd3fc !important;
+  font-weight: 700 !important;
+}
+
+/* Col Covered in Night Mode: Deep indigo with bright lavender digits */
+.theme-night .matrix-cell-col-covered {
+  background-color: #12153f !important;
+  border-color: #818cf8 !important;
+}
+.theme-night .matrix-cell-col-covered .cell-val {
+  color: #a5b4fc !important;
+  font-weight: 700 !important;
+}
+
+.theme-night .cell-badge-zero {
+  background-color: rgba(56, 189, 248, 0.25) !important;
+  color: #38bdf8 !important;
+  border: 1px solid rgba(56, 189, 248, 0.6) !important;
+  font-weight: 800 !important;
+}
+
+.theme-night .min-reduction-cell {
+  background-color: #261604 !important;
+  color: #fde047 !important;
+  border-color: #f59e0b !important;
+  font-weight: 900 !important;
+}
+
+.theme-night .min-reduction-header {
+  background-color: #381f03 !important;
+  color: #fef08a !important;
+  border-color: #f59e0b !important;
+  font-weight: 900 !important;
+}
+
+.theme-night img[alt="Hungarian Algorithm Logo"] {
+  box-shadow: 0 0 16px rgba(0, 243, 255, 0.45), 0 0 25px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* Print Optimization */
+@media print {
+  body {
+    background-color: white !important;
+    background-image: none !important;
+    color: black !important;
+  }
+  
+  .ambient-light-glow-1,
+  .ambient-light-glow-2,
+  #app-header-controls,
+  #theme-controls,
+  #btn-print-solution,
+  #btn-solve-hungarian,
+  #btn-add-dimension,
+  #btn-remove-dimension,
+  #btn-randomize,
+  #btn-clear-values,
+  #btn-reset-values,
+  #btn-new-problem,
+  #btn-prev-step,
+  #btn-next-step,
+  #btn-view-slides,
+  #btn-view-all-steps,
+  select,
+  button {
+    display: none !important;
+  }
+
+  .shadow-xs, .shadow-sm, .shadow-md {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+}

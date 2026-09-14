@@ -1,0 +1,6 @@
+{
+  "name": "Assignment Problem Solver — Hungarian Method",
+  "description": "Educational Operations Research solver for balanced assignment problems using the Hungarian Method with interactive step-by-step matrix reductions, visual line coverings, and plain-language explanations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,205 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGlow" cx="45%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#19489e" />
+      <stop offset="45%" stop-color="#0f2b69" />
+      <stop offset="85%" stop-color="#07173b" />
+      <stop offset="100%" stop-color="#040b1e" />
+    </radialGradient>
+
+    <!-- Cyan Swoosh Gradient -->
+    <linearGradient id="cyanSwoosh" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="35%" stop-color="#00f3ff" />
+      <stop offset="75%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+
+    <!-- Gold/Amber Swoosh Gradient -->
+    <linearGradient id="goldSwoosh" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="30%" stop-color="#f59e0b" />
+      <stop offset="70%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+
+    <!-- Matrix Card Gradient -->
+    <linearGradient id="cardGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#edf3f9" />
+    </linearGradient>
+
+    <!-- Green Assignment Cell Gradient -->
+    <linearGradient id="greenCellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <!-- Shadow Filters -->
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#020919" flood-opacity="0.6" />
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+
+    <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur1" />
+      <feGaussianBlur stdDeviation="2" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur1" />
+        <feMergeNode in="blur2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Base Squircle App Icon Container -->
+  <rect x="20" y="20" width="472" height="472" rx="112" ry="112" fill="url(#bgGlow)" stroke="#1e3a8a" stroke-width="2" />
+
+  <!-- Inner Soft Light Shading -->
+  <rect x="22" y="22" width="468" height="236" rx="110" ry="110" fill="white" opacity="0.06" pointer-events="none" />
+
+  <!-- Bottom-Right Amber/Gold Swoosh Ribbon (Layered behind matrix corner) -->
+  <path d="M 370 170 C 445 225, 480 320, 420 405 C 380 460, 290 445, 230 435 C 310 450, 400 420, 435 365 C 475 295, 440 220, 370 170 Z" 
+        fill="url(#goldSwoosh)" opacity="0.95" />
+  <path d="M 385 185 C 455 240, 475 330, 425 400 C 370 470, 240 445, 175 435 C 265 448, 385 435, 435 365 C 475 295, 440 225, 385 185 Z" 
+        fill="#fef08a" opacity="0.25" />
+
+  <!-- Central Assignment Matrix Card -->
+  <g filter="url(#cardShadow)">
+    <rect x="95" y="105" width="310" height="285" rx="30" ry="30" fill="url(#cardGrad)" stroke="#cbd5e1" stroke-width="2.5" />
+  </g>
+
+  <!-- Matrix Grid Lines (4x4 layout) -->
+  <!-- Inner Column Dividers: Width=310, each col ~ 77.5px. x = 95 + 77.5 = 172.5, 250, 327.5 -->
+  <g stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" opacity="0.75">
+    <line x1="158" y1="105" x2="158" y2="390" />
+    <line x1="240" y1="105" x2="240" y2="390" />
+    <line x1="322" y1="105" x2="322" y2="390" />
+
+    <!-- Inner Row Dividers: Height=285, row 0 height ~71px, row 1 ~71px, row 2 ~71px, row 3 ~72px -->
+    <!-- y = 105 + 71 = 176, 247, 318 -->
+    <line x1="95" y1="176" x2="405" y2="176" />
+    <line x1="95" y1="248" x2="405" y2="248" />
+    <line x1="95" y1="320" x2="405" y2="320" />
+  </g>
+
+  <!-- TOP HEADER ICONS (Dark Slate / Charcoal) -->
+  <g fill="#1e293b" stroke="#1e293b">
+    <!-- Col 1 (x=199, y=140): Gear / Settings Icon -->
+    <g transform="translate(199, 140) scale(1.15)">
+      <path d="M-4,-14 L4,-14 L5,-10 C7,-9 9,-8 10,-6 L14,-7 L18,-1 L15,2 C15,4 15,6 15,7 L18,10 L14,16 L10,14 C8,16 6,17 4,18 L3,22 L-5,22 L-6,18 C-8,17 -10,16 -12,14 L-16,16 L-20,10 L-17,7 C-17,6 -17,4 -17,2 L-20,-1 L-16,-7 L-12,-6 C-10,-8 -8,-9 -6,-10 Z" 
+            transform="scale(0.7) translate(1, -2)" fill="#1e293b" stroke="none" />
+      <circle cx="0.5" cy="-1.5" r="4.5" fill="#edf3f9" stroke="none" />
+    </g>
+
+    <!-- Col 2 (x=281, y=140): Factory / Industry Icon -->
+    <g transform="translate(269, 126)">
+      <!-- Factory silhouette: Chimney, saw-tooth roofs, building base -->
+      <path d="M 2 24 L 2 15 L 7 19 L 7 15 L 12 19 L 12 7 L 17 7 L 17 19 L 23 19 L 23 24 Z" 
+            fill="#1e293b" stroke="none" transform="scale(1.15)" />
+      <!-- Windows -->
+      <rect x="5" y="21" width="3" height="3" fill="#ffffff" stroke="none" />
+      <rect x="11" y="21" width="3" height="3" fill="#ffffff" stroke="none" />
+      <rect x="17" y="21" width="3" height="3" fill="#ffffff" stroke="none" />
+    </g>
+
+    <!-- Col 3 (x=363, y=140): Isometric 3D Cube / Package -->
+    <g transform="translate(363, 140) scale(1.1)">
+      <!-- Top Face -->
+      <polygon points="0,-14 13,-6 0,1 -13,-6" fill="#475569" stroke="#1e293b" stroke-width="1.2" stroke-linejoin="round" />
+      <!-- Left Face -->
+      <polygon points="-13,-6 0,1 0,16 -13,9" fill="#1e293b" stroke="#1e293b" stroke-width="1.2" stroke-linejoin="round" />
+      <!-- Right Face -->
+      <polygon points="0,1 13,-6 13,9 0,16" fill="#334155" stroke="#1e293b" stroke-width="1.2" stroke-linejoin="round" />
+    </g>
+  </g>
+
+  <!-- ROW HEADER ICONS (Persons / Assignees) -->
+  <g fill="#1e293b">
+    <!-- Row 1: Person Silhouette (x=126, y=212) -->
+    <g transform="translate(126, 212)">
+      <circle cx="0" cy="-8" r="6" />
+      <path d="M -10,7 C -10,-1 -5,-2 0,-2 C 5,-2 10,-1 10,7 Z" />
+    </g>
+
+    <!-- Row 2: Person Silhouette (x=126, y=284) -->
+    <g transform="translate(126, 284)">
+      <circle cx="0" cy="-8" r="6" />
+      <path d="M -10,7 C -10,-1 -5,-2 0,-2 C 5,-2 10,-1 10,7 Z" />
+    </g>
+
+    <!-- Row 3: Person Silhouette (x=126, y=355) -->
+    <g transform="translate(126, 355)">
+      <circle cx="0" cy="-8" r="6" />
+      <path d="M -10,7 C -10,-1 -5,-2 0,-2 C 5,-2 10,-1 10,7 Z" />
+    </g>
+  </g>
+
+  <!-- GREEN ASSIGNED SOLUTION CELLS -->
+  <!-- Cell 1: Row 1, Col 2 -> Center: x=281, y=212 -->
+  <rect x="246" y="181" width="70" height="62" rx="14" ry="14" fill="url(#greenCellGrad)" stroke="#34d399" stroke-width="2" />
+
+  <!-- Cell 2: Row 2, Col 1 -> Center: x=199, y=284 -->
+  <rect x="164" y="253" width="70" height="62" rx="14" ry="14" fill="url(#greenCellGrad)" stroke="#34d399" stroke-width="2" />
+
+  <!-- Cell 3: Row 3, Col 3 -> Center: x=363, y=355 -->
+  <rect x="328" y="325" width="70" height="62" rx="14" ry="14" fill="url(#greenCellGrad)" stroke="#34d399" stroke-width="2" />
+
+  <!-- NEON GREEN OPTIMAL BIPARTITE CONNECTION CIRCUIT -->
+  <!-- Circuit connects Node(281, 212) -> Node(199, 284) -> Node(363, 355) -->
+  <g filter="url(#neonGlow)">
+    <!-- Circuit path with right angles -->
+    <path d="M 281 212 
+             L 216 212 
+             L 216 284 
+             M 216 284 
+             L 216 342 
+             L 363 342 
+             L 363 355" 
+          fill="none" stroke="#22c55e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  <!-- Sharp core line on top -->
+  <path d="M 281 212 
+           L 216 212 
+           L 216 284 
+           M 216 284 
+           L 216 342 
+           L 363 342 
+           L 363 355" 
+        fill="none" stroke="#bbf7d0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- LUMINOUS WHITE NODES IN ASSIGNED CELLS -->
+  <!-- Node 1: (281, 212) -->
+  <circle cx="281" cy="212" r="14" fill="#22c55e" opacity="0.4" filter="url(#nodeGlow)" />
+  <circle cx="281" cy="212" r="9" fill="#ffffff" stroke="#86efac" stroke-width="2" />
+
+  <!-- Node 2: (199, 284) -->
+  <circle cx="199" cy="284" r="14" fill="#22c55e" opacity="0.4" filter="url(#nodeGlow)" />
+  <circle cx="199" cy="284" r="9" fill="#ffffff" stroke="#86efac" stroke-width="2" />
+
+  <!-- Node 3: (363, 355) -->
+  <circle cx="363" cy="355" r="14" fill="#22c55e" opacity="0.4" filter="url(#nodeGlow)" />
+  <circle cx="363" cy="355" r="9" fill="#ffffff" stroke="#86efac" stroke-width="2" />
+
+  <!-- TOP-LEFT CYAN SWOOSH RIBBON (Foreground 3D arc) -->
+  <path d="M 20 230 C 50 130, 110 50, 230 40 C 290 35, 330 65, 330 65 C 330 65, 230 45, 150 90 C 80 130, 45 200, 20 230 Z" 
+        fill="url(#cyanSwoosh)" opacity="0.95" />
+  <!-- Gloss highlight on cyan swoosh -->
+  <path d="M 50 180 C 80 120, 135 65, 240 50 C 285 45, 315 62, 315 62 C 315 62, 235 48, 160 85 C 95 120, 65 170, 50 180 Z" 
+        fill="#e0f2fe" opacity="0.5" />
+
+  <!-- BOTTOM-RIGHT GOLDEN SWOOSH FRONT CRESCENT -->
+  <path d="M 405 175 C 475 250, 475 350, 420 415 C 365 480, 260 440, 200 425 C 275 435, 370 425, 415 370 C 460 310, 450 230, 405 175 Z" 
+        fill="url(#goldSwoosh)" opacity="0.95" />
+  <path d="M 415 200 C 465 260, 465 340, 425 395 C 385 440, 310 432, 250 425 C 320 428, 385 410, 420 365 C 455 315, 448 245, 415 200 Z" 
+        fill="#ffffff" opacity="0.35" />
+</svg>
