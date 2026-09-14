@@ -394,10 +394,10 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
                         onKeyDown={(e) => handleCellKeyDown(e, rIdx, cIdx)}
                         onFocus={(e) => e.currentTarget.select()}
                         placeholder="0"
-                        className={`w-full text-center font-mono text-sm py-2 px-1 rounded transition-all focus:outline-none ${
+                        className={`w-full text-center font-mono text-base sm:text-lg font-bold py-2.5 px-1.5 rounded transition-all focus:outline-none ${
                           error
-                            ? 'text-red-700 font-semibold focus:ring-2 focus:ring-red-500'
-                            : 'text-stone-900 hover:bg-stone-50 focus:bg-amber-50/50 focus:ring-2 focus:ring-amber-500 font-medium'
+                            ? 'text-red-700 font-black focus:ring-2 focus:ring-red-500'
+                            : 'text-stone-900 hover:bg-stone-50 focus:bg-amber-50/50 focus:ring-2 focus:ring-amber-500 font-bold'
                         }`}
                         title={`${context.rows[rIdx] || `Row ${rIdx + 1}`} → ${
                           context.columns[cIdx] || `Col ${cIdx + 1}`

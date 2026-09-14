@@ -112,10 +112,10 @@ export const FinalResultCard: React.FC<FinalResultCardProps> = ({
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100 text-xs">
+              <tbody className="divide-y divide-stone-100 text-sm">
                 {assignments.map((assignment, idx) => (
                   <tr key={idx} className="hover:bg-amber-50/50 transition-colors">
-                    <td className="py-2.5 px-3 text-stone-500 font-mono font-medium">{idx + 1}</td>
+                    <td className="py-2.5 px-3 text-stone-500 font-mono font-bold text-sm">{idx + 1}</td>
                     <td className="py-2.5 px-3 font-bold text-stone-900">
                       {assignment.rowLabel}
                     </td>
@@ -125,19 +125,19 @@ export const FinalResultCard: React.FC<FinalResultCardProps> = ({
                     <td className="py-2.5 px-3 font-semibold text-stone-800">
                       {assignment.colLabel}
                     </td>
-                    <td className="py-2.5 px-3 text-right font-mono font-extrabold text-amber-950 bg-amber-50/80">
-                      {assignment.originalCost} units
+                    <td className="py-2.5 px-3 text-right font-mono font-black text-base sm:text-lg text-amber-950 bg-amber-50/80">
+                      {assignment.originalCost} <span className="text-xs font-semibold text-stone-600">units</span>
                     </td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
-                <tr className="bg-amber-100 border-t-2 border-amber-300 text-xs font-bold">
-                  <td colSpan={4} className="py-3 px-3 text-stone-900 text-right">
+                <tr className="bg-amber-100 border-t-2 border-amber-300 text-sm font-bold">
+                  <td colSpan={4} className="py-3 px-3 text-stone-900 text-right font-bold">
                     Total {metricLabel}:
                   </td>
-                  <td className="py-3 px-3 text-right font-mono text-base font-extrabold text-amber-950">
-                    {totalValue} units
+                  <td className="py-3 px-3 text-right font-mono text-lg sm:text-xl font-black text-amber-950">
+                    {totalValue} <span className="text-xs font-bold text-stone-700">units</span>
                   </td>
                 </tr>
               </tfoot>

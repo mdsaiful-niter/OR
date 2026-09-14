@@ -275,10 +275,10 @@ export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
                         )}
 
                         {/* Cell Value & State Chips */}
-                        <div className="relative z-20 flex flex-col items-center justify-center min-h-[38px]">
+                        <div className="relative z-20 flex flex-col items-center justify-center min-h-[44px]">
                           <span
                             className={`tabular-nums cell-val cell-val-${cellState} ${textClass} ${
-                              isZero ? 'cell-val-zero font-black text-base' : 'font-semibold text-sm'
+                              isZero ? 'cell-val-zero font-black text-xl sm:text-2xl' : 'font-bold text-lg sm:text-xl'
                             }`}
                           >
                             {val}
@@ -286,29 +286,29 @@ export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
 
                           {/* Zero indication badge */}
                           {highlightZeros && isZero && !isAssigned && (
-                            <span className="mt-0.5 inline-block text-[9px] font-sans font-bold px-1.5 py-0.5 rounded cell-badge-zero bg-stone-900 text-white shadow-2xs">
+                            <span className="mt-1 inline-block text-[10px] font-sans font-black px-2 py-0.5 rounded cell-badge-zero bg-stone-900 text-white shadow-2xs">
                               zero
                             </span>
                           )}
 
                           {/* Assigned Zero Chip */}
                           {isAssigned && (
-                            <span className="mt-1 inline-flex items-center gap-0.5 text-[10px] font-sans font-black px-2 py-0.5 rounded-full cell-badge-assigned bg-emerald-700 text-white shadow-xs">
-                              <Check className="w-2.5 h-2.5 stroke-[3]" />
+                            <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-sans font-black px-2.5 py-0.5 rounded-full cell-badge-assigned bg-emerald-700 text-white shadow-xs">
+                              <Check className="w-3 h-3 stroke-[3]" />
                               Assigned
                             </span>
                           )}
 
                           {/* Adjustment Operation Badge: Uncovered (-k) */}
                           {adjustmentMeta && isUncovered && (
-                            <span className="mt-1 inline-block text-[10px] font-mono font-black px-1.5 py-0.5 rounded cell-badge-uncovered bg-amber-900 text-white shadow-2xs">
+                            <span className="mt-1 inline-block text-xs font-mono font-black px-2 py-0.5 rounded cell-badge-uncovered bg-amber-900 text-white shadow-2xs">
                               −{adjustmentMeta.smallestUncovered}
                             </span>
                           )}
 
                           {/* Adjustment Operation Badge: Intersection (+k) */}
                           {adjustmentMeta && isIntersection && (
-                            <span className="mt-1 inline-block text-[10px] font-mono font-black px-1.5 py-0.5 rounded cell-badge-intersection bg-purple-900 text-white shadow-2xs">
+                            <span className="mt-1 inline-block text-xs font-mono font-black px-2 py-0.5 rounded cell-badge-intersection bg-purple-900 text-white shadow-2xs">
                               +{adjustmentMeta.smallestUncovered}
                             </span>
                           )}
@@ -319,7 +319,7 @@ export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
 
                   {/* Row Minimum Value */}
                   {rowMinimums && (
-                    <td className="p-3 text-center font-mono text-sm font-black bg-amber-100 text-amber-950 border border-amber-300 min-reduction-cell">
+                    <td className="p-3 text-center font-mono text-base sm:text-lg font-black bg-amber-100 text-amber-950 border border-amber-300 min-reduction-cell">
                       {rowMinimums[rIdx]}
                     </td>
                   )}
@@ -336,7 +336,7 @@ export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
                 {colMinimums.slice(0, n).map((cMin, cIdx) => (
                   <td
                     key={cIdx}
-                    className="p-3 text-center font-mono text-sm font-black bg-amber-100 text-amber-950 border border-amber-300 min-reduction-cell"
+                    className="p-3 text-center font-mono text-base sm:text-lg font-black bg-amber-100 text-amber-950 border border-amber-300 min-reduction-cell"
                   >
                     {cMin}
                   </td>

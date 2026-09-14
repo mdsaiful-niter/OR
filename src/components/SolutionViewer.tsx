@@ -132,17 +132,17 @@ export const SolutionViewer: React.FC<SolutionViewerProps> = ({
             <h4 className="text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
               Row Subtraction Details
             </h4>
-            <div className="flex flex-col gap-2 text-xs">
+            <div className="flex flex-col gap-2 text-xs sm:text-sm">
               {step.meta.rowSubtractions.map((rowSub) => (
                 <div
                   key={rowSub.row}
                   className="p-2.5 bg-white rounded border border-stone-200/80 shadow-2xs"
                 >
-                  <div className="font-semibold text-stone-800 mb-1">
+                  <div className="font-semibold text-stone-800 mb-1 text-sm">
                     {context.rows[rowSub.row] || `Row ${rowSub.row + 1}`}:{' '}
-                    <span className="text-amber-700 font-mono font-bold">min = {rowSub.min}</span>
+                    <span className="text-amber-800 font-mono text-base font-black">min = {rowSub.min}</span>
                   </div>
-                  <div className="font-mono text-[11px] text-stone-600">
+                  <div className="font-mono text-xs sm:text-sm font-bold text-stone-700">
                     {rowSub.calculations.join(', ')}
                   </div>
                 </div>
@@ -157,17 +157,17 @@ export const SolutionViewer: React.FC<SolutionViewerProps> = ({
             <h4 className="text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
               Column Subtraction Details
             </h4>
-            <div className="flex flex-col gap-2 text-xs">
+            <div className="flex flex-col gap-2 text-xs sm:text-sm">
               {step.meta.colSubtractions.map((colSub) => (
                 <div
                   key={colSub.col}
                   className="p-2.5 bg-white rounded border border-stone-200/80 shadow-2xs"
                 >
-                  <div className="font-semibold text-stone-800 mb-1">
+                  <div className="font-semibold text-stone-800 mb-1 text-sm">
                     {context.columns[colSub.col] || `Col ${colSub.col + 1}`}:{' '}
-                    <span className="text-indigo-700 font-mono font-bold">min = {colSub.min}</span>
+                    <span className="text-indigo-800 font-mono text-base font-black">min = {colSub.min}</span>
                   </div>
-                  <div className="font-mono text-[11px] text-stone-600">
+                  <div className="font-mono text-xs sm:text-sm font-bold text-stone-700">
                     {colSub.calculations.join(', ')}
                   </div>
                 </div>
@@ -180,28 +180,28 @@ export const SolutionViewer: React.FC<SolutionViewerProps> = ({
         {isAdjustment && step.meta?.adjustment && (
           <div className="mb-5 p-3.5 rounded-lg bg-purple-50/50 border border-purple-200">
             <h4 className="text-xs font-bold uppercase tracking-wider text-purple-900 mb-2">
-              Adjustment Breakdown (k = {step.meta.adjustment.smallestUncovered})
+              Adjustment Breakdown (<span className="font-mono text-sm sm:text-base font-black">k = {step.meta.adjustment.smallestUncovered}</span>)
             </h4>
-            <div className="flex flex-col gap-2 text-xs">
+            <div className="flex flex-col gap-2 text-xs sm:text-sm">
               <div className="p-2.5 bg-white rounded border border-purple-200/80 shadow-2xs">
-                <span className="text-amber-800 font-semibold block">
-                  −{step.meta.adjustment.smallestUncovered} (Uncovered cells)
+                <span className="text-amber-900 font-bold text-sm block">
+                  <span className="font-mono text-base font-black">−{step.meta.adjustment.smallestUncovered}</span> (Uncovered cells)
                 </span>
-                <span className="text-stone-500 text-[11px]">
+                <span className="text-stone-600 text-xs font-medium">
                   Applied to {step.meta.adjustment.uncoveredCells.length} cells
                 </span>
               </div>
               <div className="p-2.5 bg-white rounded border border-purple-200/80 shadow-2xs">
-                <span className="text-purple-800 font-semibold block">
-                  +{step.meta.adjustment.smallestUncovered} (Line intersection cells)
+                <span className="text-purple-900 font-bold text-sm block">
+                  <span className="font-mono text-base font-black">+{step.meta.adjustment.smallestUncovered}</span> (Line intersection cells)
                 </span>
-                <span className="text-stone-500 text-[11px]">
+                <span className="text-stone-600 text-xs font-medium">
                   Applied to {step.meta.adjustment.intersectionCells.length} cells
                 </span>
               </div>
               <div className="p-2.5 bg-white rounded border border-purple-200/80 shadow-2xs">
-                <span className="text-stone-800 font-semibold block">Unchanged</span>
-                <span className="text-stone-500 text-[11px]">
+                <span className="text-stone-800 font-bold text-sm block">Unchanged</span>
+                <span className="text-stone-600 text-xs font-medium">
                   {step.meta.adjustment.unchangedCount} single-covered cells
                 </span>
               </div>

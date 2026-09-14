@@ -240,6 +240,29 @@ body.theme-day,
   font-weight: 900 !important;
 }
 
+/* Numeric Typography Scaling for Matrix Values */
+.cell-val {
+  font-size: 1.125rem !important;
+  line-height: 1.3 !important;
+}
+
+@media (min-width: 640px) {
+  .cell-val {
+    font-size: 1.25rem !important;
+  }
+}
+
+.cell-val-zero {
+  font-size: 1.25rem !important;
+  font-weight: 900 !important;
+}
+
+@media (min-width: 640px) {
+  .cell-val-zero {
+    font-size: 1.5rem !important;
+  }
+}
+
 /* Day Mode Matrix High-Contrast Cell & Foreground Styling (Zero Grayness) */
 .theme-day .matrix-cell-normal {
   background-color: #ffffff !important;
