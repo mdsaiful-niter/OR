@@ -78,8 +78,11 @@ export default function App() {
             type: 'cell',
             row: r,
             col: c,
-            message: `Enter a numerical value for ${rowLabel} → ${colLabel}.`,
+            message: `Enter a numerical value or "00" (restricted) for ${rowLabel} → ${colLabel}.`,
           });
+        } else if (raw.trim() === '00') {
+          // '00' signifies a restricted assignment cell — valid!
+          continue;
         } else {
           const num = Number(raw.trim());
           if (isNaN(num)) {
@@ -87,7 +90,7 @@ export default function App() {
               type: 'cell',
               row: r,
               col: c,
-              message: `Cell ${rowLabel} → ${colLabel} must be a valid number (received "${raw}").`,
+              message: `Cell ${rowLabel} → ${colLabel} must be a number or "00" for restricted assignment (received "${raw}").`,
             });
           }
         }
@@ -105,8 +108,13 @@ export default function App() {
       return;
     }
 
+    // Identify restricted cells marked with "00"
+    const restrictedCells: boolean[][] = matrix.map((row) =>
+      row.map((cell) => cell.trim() === '00')
+    );
+
     const numericMatrix: number[][] = matrix.map((row) =>
-      row.map((cell) => Number(cell.trim()))
+      row.map((cell) => (cell.trim() === '00' ? 0 : Number(cell.trim())))
     );
 
     // Resolve labels: use typed value or fallback to placeholder
@@ -128,7 +136,7 @@ export default function App() {
       }),
     };
 
-    const result = solveHungarian(numericMatrix, resolvedContext);
+    const result = solveHungarian(numericMatrix, resolvedContext, restrictedCells);
     setSolverResult(result);
     setCurrentStepIndex(0);
 
@@ -185,6 +193,15 @@ export default function App() {
       row.map(() => String(Math.floor(Math.random() * 30) + 1))
     );
     setMatrix(randomized);
+    setValidationErrors([]);
+    setSolverResult(null);
+  };
+
+  const handleLoadPreset = (presetId: string) => {
+    const preset = PRESET_PROBLEMS.find((p) => p.id === presetId);
+    if (!preset) return;
+    setContext({ ...preset.context });
+    setMatrix(preset.matrix.map((row) => row.map((c) => String(c))));
     setValidationErrors([]);
     setSolverResult(null);
   };
@@ -284,6 +301,7 @@ export default function App() {
         <ProblemSetup
           context={context}
           onContextChange={setContext}
+          onLoadPreset={handleLoadPreset}
         />
 
         {/* Matrix Editor */}

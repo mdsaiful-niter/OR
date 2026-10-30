@@ -18,6 +18,7 @@ interface MatrixVisualizerProps {
   rowMinimums?: number[];
   colMinimums?: number[];
   highlightZeros?: boolean;
+  restrictedCells?: boolean[][];
 }
 
 export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
@@ -32,6 +33,7 @@ export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
   rowMinimums,
   colMinimums,
   highlightZeros = false,
+  restrictedCells,
 }) => {
   const n = matrix.length;
 
@@ -201,12 +203,13 @@ export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
 
                   {/* Matrix Cells */}
                   {row.map((val, cIdx) => {
+                    const isRestricted = Boolean(restrictedCells?.[rIdx]?.[cIdx]) || val >= 500000;
                     const isColCovered = colLineSet.has(cIdx);
                     const cellKey = `${rIdx}-${cIdx}`;
                     const isAssigned = assignmentMap.has(cellKey);
                     const isUncovered = uncoveredMap.has(cellKey);
                     const isIntersection = intersectionMap.has(cellKey);
-                    const isZero = val === 0;
+                    const isZero = val === 0 && !isRestricted;
 
                     // Compute background and border classes with guaranteed high-contrast foreground
                     let cellState = 'normal';
@@ -214,7 +217,12 @@ export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
                     let borderClass = 'border-stone-300';
                     let textClass = 'text-stone-900';
 
-                    if (isAssigned) {
+                    if (isRestricted) {
+                      cellState = 'restricted';
+                      cellBg = 'matrix-cell-restricted bg-rose-50/90';
+                      borderClass = 'border-rose-300 border-dashed';
+                      textClass = 'text-rose-700 font-black';
+                    } else if (isAssigned) {
                       cellState = 'assigned';
                       cellBg = 'matrix-cell-assigned bg-emerald-100 ring-2 ring-emerald-600 ring-inset';
                       borderClass = 'border-emerald-500';
@@ -278,14 +286,25 @@ export const MatrixVisualizer: React.FC<MatrixVisualizerProps> = ({
                         <div className="relative z-20 flex flex-col items-center justify-center min-h-[36px] sm:min-h-[44px]">
                           <span
                             className={`tabular-nums cell-val cell-val-${cellState} ${textClass} ${
-                              isZero ? 'cell-val-zero font-black text-xl sm:text-2xl' : 'font-bold text-lg sm:text-xl'
+                              isRestricted
+                                ? 'font-black text-xl sm:text-2xl text-rose-700'
+                                : isZero
+                                ? 'cell-val-zero font-black text-xl sm:text-2xl'
+                                : 'font-bold text-lg sm:text-xl'
                             }`}
                           >
-                            {val}
+                            {isRestricted ? 'M' : val}
                           </span>
 
+                          {/* Restricted Cell Badge */}
+                          {isRestricted && (
+                            <span className="mt-0.5 sm:mt-1 inline-block text-[8px] sm:text-[9px] font-sans font-black px-1 sm:px-1.5 py-0.5 rounded bg-rose-700 text-white shadow-2xs">
+                              00 (Restricted)
+                            </span>
+                          )}
+
                           {/* Zero indication badge */}
-                          {highlightZeros && isZero && !isAssigned && (
+                          {highlightZeros && isZero && !isAssigned && !isRestricted && (
                             <span className="mt-0.5 sm:mt-1 inline-block text-[9px] sm:text-[10px] font-sans font-black px-1.5 sm:px-2 py-0.5 rounded cell-badge-zero bg-stone-900 text-white shadow-2xs">
                               zero
                             </span>

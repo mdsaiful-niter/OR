@@ -270,6 +270,14 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
             <RotateCcw className="w-3.5 h-3.5 text-stone-500" />
             Clear
           </button>
+
+          {/* Restriction Tip Badge */}
+          <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-stone-100/90 border border-stone-200 text-stone-600 text-[11px]">
+            <span className="font-mono font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded border border-rose-300">
+              00
+            </span>
+            <span>= Restricted (Prohibited) Assignment</span>
+          </div>
         </div>
       </div>
 
@@ -378,31 +386,49 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
                 {/* Editable Matrix Cells */}
                 {row.map((val, cIdx) => {
                   const error = getCellError(rIdx, cIdx);
+                  const isRestricted = val.trim() === '00';
                   return (
                     <td
                       key={cIdx}
-                      className={`p-0.5 sm:p-1.5 text-center border border-stone-200 ${
-                        error ? 'bg-red-50/70 ring-1 ring-red-400' : 'bg-white'
+                      className={`relative p-0.5 sm:p-1.5 text-center border transition-colors ${
+                        error
+                          ? 'bg-red-50/70 border-red-400 ring-1 ring-red-400'
+                          : isRestricted
+                          ? 'bg-rose-50/90 border-rose-300 ring-1 ring-rose-400/50'
+                          : 'bg-white border-stone-200'
                       }`}
                     >
                       <input
                         type="text"
-                        inputMode="decimal"
+                        inputMode="text"
                         id={`cell-${rIdx}-${cIdx}`}
                         value={val}
                         onChange={(e) => handleCellChange(rIdx, cIdx, e.target.value)}
                         onKeyDown={(e) => handleCellKeyDown(e, rIdx, cIdx)}
                         onFocus={(e) => e.currentTarget.select()}
                         placeholder="0"
-                        className={`w-full text-center font-mono text-base sm:text-lg font-bold py-1.5 sm:py-2.5 px-1 sm:px-1.5 rounded transition-colors duration-150 focus:outline-none ${
+                        className={`w-full text-center font-mono text-base sm:text-lg py-1.5 sm:py-2.5 px-1 sm:px-1.5 rounded transition-colors duration-150 focus:outline-none ${
                           error
                             ? 'text-red-700 font-black focus:ring-2 focus:ring-red-500'
-                            : 'text-stone-900 hover:bg-stone-50 focus:bg-amber-50/50 focus:ring-2 focus:ring-amber-500 font-bold'
+                            : isRestricted
+                            ? 'text-rose-700 font-black bg-rose-100/50 focus:ring-2 focus:ring-rose-500'
+                            : 'text-stone-900 font-bold hover:bg-stone-50 focus:bg-amber-50/50 focus:ring-2 focus:ring-amber-500'
                         }`}
-                        title={`${context.rows[rIdx] || `Row ${rIdx + 1}`} → ${
-                          context.columns[cIdx] || `Col ${cIdx + 1}`
-                        }`}
+                        title={
+                          isRestricted
+                            ? `${context.rows[rIdx] || `Row ${rIdx + 1}`} → ${
+                                context.columns[cIdx] || `Col ${cIdx + 1}`
+                              } [RESTRICTED ASSIGNMENT: Cannot be paired]`
+                            : `${context.rows[rIdx] || `Row ${rIdx + 1}`} → ${
+                                context.columns[cIdx] || `Col ${cIdx + 1}`
+                              }`
+                        }
                       />
+                      {isRestricted && (
+                        <span className="block text-[8px] sm:text-[9px] font-sans font-black text-rose-600 uppercase tracking-tight pb-0.5">
+                          Restricted
+                        </span>
+                      )}
                     </td>
                   );
                 })}

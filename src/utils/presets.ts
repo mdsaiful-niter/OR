@@ -9,7 +9,7 @@ export interface PresetProblem {
   name: string;
   description: string;
   context: ProblemContext;
-  matrix: number[][];
+  matrix: (number | string)[][];
 }
 
 export const PRESET_PROBLEMS: PresetProblem[] = [
@@ -32,6 +32,50 @@ export const PRESET_PROBLEMS: PresetProblem[] = [
       [9, 2, 7],
       [6, 4, 3],
       [5, 8, 1],
+    ],
+  },
+  {
+    id: 'multiple-solutions-4x4',
+    name: 'Multiple Optimal Solutions (4 × 4 Alternate Pairings)',
+    description: 'Demonstrates alternate optimal zero chains yielding the exact same minimum cost.',
+    context: {
+      objective: 'minimize',
+      rowEntityCategory: 'Workers',
+      columnEntityCategory: 'Jobs',
+      rowEntityCustom: '',
+      columnEntityCustom: '',
+      rowEntityName: 'Worker',
+      columnEntityName: 'Job',
+      rows: ['Worker 1', 'Worker 2', 'Worker 3', 'Worker 4'],
+      columns: ['Job A', 'Job B', 'Job C', 'Job D'],
+    },
+    matrix: [
+      [12, 10, 15, 22],
+      [16, 14, 18, 20],
+      [24, 18, 22, 24],
+      [18, 14, 20, 22],
+    ],
+  },
+  {
+    id: 'restricted-assignment-4x4',
+    name: 'Restricted Assignment Problem (00 in Restricted Cells)',
+    description: 'Prohibited routes where Worker 2 cannot take Job C and Worker 4 cannot take Job A (marked as "00").',
+    context: {
+      objective: 'minimize',
+      rowEntityCategory: 'Workers',
+      columnEntityCategory: 'Jobs',
+      rowEntityCustom: '',
+      columnEntityCustom: '',
+      rowEntityName: 'Worker',
+      columnEntityName: 'Job',
+      rows: ['Worker 1', 'Worker 2', 'Worker 3', 'Worker 4'],
+      columns: ['Job A', 'Job B', 'Job C', 'Job D'],
+    },
+    matrix: [
+      ['12', '10', '15', '22'],
+      ['14', '18', '00', '16'],
+      ['11', '14', '18', '13'],
+      ['00', '12', '16', '14'],
     ],
   },
   {

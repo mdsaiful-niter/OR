@@ -44,6 +44,14 @@ export interface AssignmentCell {
   rowLabel: string;
   colLabel: string;
   originalCost: number;
+  isRestricted?: boolean;
+}
+
+export interface AlternativeSolution {
+  solutionIndex: number;
+  assignments: AssignmentCell[];
+  equationString: string;
+  totalValue: number;
 }
 
 export type StepType =
@@ -92,6 +100,11 @@ export interface SolutionStep {
     adjustment?: AdjustmentMeta;
     assignment?: AssignmentCell[];
     totalCost?: number;
+    hasMultipleSolutions?: boolean;
+    totalSolutionsCount?: number;
+    allSolutions?: AlternativeSolution[];
+    isRestrictedProblem?: boolean;
+    restrictedCells?: boolean[][];
   };
 }
 
@@ -106,6 +119,12 @@ export interface SolverResult {
   equationString: string;
   objective: Objective;
   n: number;
+  hasMultipleSolutions: boolean;
+  totalSolutionsCount: number;
+  allSolutions: AlternativeSolution[];
+  isRestrictedProblem: boolean;
+  restrictedCells: boolean[][];
+  isInfeasible?: boolean;
 }
 
 export interface ValidationError {

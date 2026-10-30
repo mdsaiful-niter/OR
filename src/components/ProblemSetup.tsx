@@ -7,9 +7,12 @@ import {
 } from '../types';
 import { BookOpen, TrendingDown, TrendingUp } from 'lucide-react';
 
+import { PRESET_PROBLEMS } from '../utils/presets';
+
 interface ProblemSetupProps {
   context: ProblemContext;
   onContextChange: (ctx: ProblemContext) => void;
+  onLoadPreset?: (presetId: string) => void;
 }
 
 const ROW_ENTITIES: StandardRowEntity[] = [
@@ -38,6 +41,7 @@ const COLUMN_ENTITIES: StandardColumnEntity[] = [
 export const ProblemSetup: React.FC<ProblemSetupProps> = ({
   context,
   onContextChange,
+  onLoadPreset,
 }) => {
   const handleObjectiveChange = (objective: Objective) => {
     onContextChange({ ...context, objective });
@@ -117,11 +121,37 @@ export const ProblemSetup: React.FC<ProblemSetupProps> = ({
 
   return (
     <section aria-labelledby="problem-setup-heading" className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-5 shadow-xs">
-      <div className="border-b border-stone-100 pb-3 sm:pb-4 mb-4 sm:mb-5">
+      <div className="border-b border-stone-100 pb-3 sm:pb-4 mb-4 sm:mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
         <h2 id="problem-setup-heading" className="text-base font-bold text-stone-900 flex items-center gap-2">
           <BookOpen className="w-4 h-4 text-stone-700" />
           1. Problem Context Setup
         </h2>
+
+        {onLoadPreset && (
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            <span className="text-xs text-stone-500 font-medium">Quick Preset:</span>
+            <select
+              aria-label="Load preset textbook problem"
+              onChange={(e) => {
+                if (e.target.value) {
+                  onLoadPreset(e.target.value);
+                  e.target.value = '';
+                }
+              }}
+              defaultValue=""
+              className="bg-stone-50 border border-stone-300 rounded-lg px-2.5 py-1 text-xs text-stone-800 font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
+            >
+              <option value="" disabled>
+                Select Example Problem...
+              </option>
+              {PRESET_PROBLEMS.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5">

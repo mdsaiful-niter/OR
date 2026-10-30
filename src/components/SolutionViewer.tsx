@@ -70,6 +70,16 @@ export const SolutionViewer: React.FC<SolutionViewerProps> = ({
                     </span>
                   )
                 )}
+                {isFinalAssignment && step.meta?.hasMultipleSolutions && (
+                  <span className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-900 font-bold border border-indigo-200">
+                    ✨ {step.meta.totalSolutionsCount} Multiple Solutions
+                  </span>
+                )}
+                {step.meta?.isRestrictedProblem && (
+                  <span className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 font-bold border border-rose-200">
+                    🔒 Restricted Problem
+                  </span>
+                )}
               </h3>
               {step.subtitle && (
                 <p className="text-xs text-stone-500 font-medium mt-0.5">{step.subtitle}</p>
@@ -263,6 +273,7 @@ export const SolutionViewer: React.FC<SolutionViewerProps> = ({
             rowMinimums={isRowReduction ? step.meta?.rowMinimums : undefined}
             colMinimums={isColReduction ? step.meta?.columnMinimums : undefined}
             highlightZeros={isZeroCovering || isOptimality || isFinalAssignment}
+            restrictedCells={step.meta?.restrictedCells}
           />
         </div>
       </div>
